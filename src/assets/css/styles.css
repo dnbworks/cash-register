@@ -1,0 +1,543 @@
+/*
+=============== 
+Variables
+===============
+*/
+
+:root {
+/* dark shades of primary color*/
+--clr-primary-1: rgb(148, 32, 172);
+--clr-primary-2: hsl(205, 77%, 27%);
+--clr-primary-3: hsl(205, 72%, 37%);
+--clr-primary-4: hsl(205, 63%, 48%);
+/* primary/main color */
+--clr-primary-5: hsl(205, 78%, 60%);
+/* lighter shades of primary color */
+--clr-primary-6: hsl(205, 89%, 70%);
+--clr-primary-7: hsl(205, 90%, 76%);
+--clr-primary-8: hsl(205, 86%, 81%);
+--clr-primary-9: hsl(205, 90%, 88%);
+--clr-primary-10: hsl(205, 100%, 96%);
+/* darkest grey - used for headings */
+--clr-grey-1: hsl(209, 61%, 16%);
+--clr-grey-2: hsl(211, 39%, 23%);
+--clr-grey-3: hsl(209, 34%, 30%);
+--clr-grey-4: hsl(209, 28%, 39%);
+/* grey used for paragraphs */
+--clr-grey-5: hsl(210, 22%, 49%);
+--clr-grey-6: hsl(209, 23%, 60%);
+--clr-grey-7: hsl(211, 27%, 70%);
+--clr-grey-8: hsl(210, 31%, 80%);
+--clr-grey-9: hsl(212, 33%, 89%);
+--clr-grey-10: hsl(210, 36%, 96%);
+--clr-white: #fff;
+--clr-red-dark: hsl(360, 67%, 44%);
+--clr-red-light: hsl(360, 71%, 66%);
+--clr-green-dark: hsl(125, 67%, 44%);
+--clr-green-light: hsl(125, 71%, 66%);
+--clr-black: #222;
+--transition: all 0.3s linear;
+--spacing: 0.1rem;
+--radius: 0.25rem;
+--light-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+--dark-shadow: 0 5px 15px rgba(0, 0, 0, 0.4);
+--max-width: 1170px;
+--fixed-width: 450px;
+--clr-orange-1: hsl(12, 83%, 98%);
+--clr-orange-2: hsl(14, 91%, 95%);
+--clr-orange-3: hsl(12, 89%, 89%);
+--clr-orange-4: hsl(13, 87%, 82%);
+--clr-orange-5: hsl(13, 88%, 68%);
+--clr-orange-6: hsl(13, 88%, 55%);
+--clr-orange-7: hsl(13, 74%, 49%);
+--clr-orange-8: hsl(13, 74%, 33%);
+--clr-orange-9: hsl(13, 73%, 25%);
+--clr-orange-10: hsl(13, 73%, 16%);
+--font-size: 14px;
+--clr-green: rgb(28, 145, 57);
+}
+/*
+=============== 
+Global Styles
+===============
+*/
+
+*,
+::after,
+::before {
+margin: 0;
+padding: 0;
+box-sizing: border-box;
+}
+body {
+font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen,
+    Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+background: var(--clr-grey-10);
+color: var(--clr-grey-1);
+line-height: 1.5;
+font-size: 0.875rem;
+}
+ul {
+list-style-type: none;
+}
+a {
+text-decoration: none;
+}
+h1,
+h2,
+h3,
+h4 {
+letter-spacing: var(--spacing);
+text-transform: capitalize;
+line-height: 1.25;
+margin-bottom: 0.75rem;
+}
+h1 {
+font-size: 3rem;
+}
+h2 {
+font-size: 2rem;
+}
+h3 {
+font-size: 1.25rem;
+}
+h4 {
+font-size: 0.875rem;
+}
+p {
+margin-bottom: 1.25rem;
+color: var(--clr-grey-5);
+}
+@media screen and (min-width: 800px) {
+h1 {
+    font-size: 4rem;
+}
+h2 {
+    font-size: 2.5rem;
+}
+h3 {
+    font-size: 1.75rem;
+}
+h4 {
+    font-size: 1rem;
+}
+body {
+    font-size: 1rem;
+}
+h1,
+h2,
+h3,
+h4 {
+    line-height: 1;
+}
+}
+
+table td {
+    border: none;
+    font-size: var(--font-size);
+    padding: 4px 8px;
+    text-align: center;
+   
+}
+
+table {
+    width: 100%;
+    border: none;
+    border-collapse: collapse;
+}
+
+/*  global classes */
+
+.app__top--header {
+    background-image: linear-gradient(rgb(241, 241, 241), rgba(248, 248, 248, 0.63));
+    padding: 15px 0;
+} 
+
+.table-wrapper {
+    width: 100%;
+    min-height: 260px;
+}
+
+.product__columns ul.header__title {
+    margin: 8px 0;
+}
+
+.product__columns ul.header__title li {
+    font-weight: bold;
+    font-size: var(--font-size);
+    color: var(--clr-green);
+    text-align: center;
+}
+
+.product__columns ul.item li {
+    font-size: var(--font-size);
+    text-align: center;
+}
+
+.product__columns ul.item li:nth-child(1), 
+.product__columns ul.header__title li:nth-child(1)
+{
+    width: 180px;
+}
+
+.product__columns ul li:nth-child(2){
+    width: 80px;
+}
+
+.product__columns ul li:nth-child(3){
+    width: 60px;
+}
+
+.product__columns ul li:nth-child(4){
+    width: 80px;
+}
+
+.product__columns ul li:nth-child(5){
+    width: 80px;
+}
+
+.product__columns table tr td:nth-child(1){
+    width: 180px !important;
+}
+
+.product__columns table tr td:nth-child(2){
+    width: 80px;
+}
+
+.product__columns table tr td:nth-child(3){
+    width: 60px;
+}
+
+.product__columns table tr td:nth-child(4){
+    width: 80px;
+}
+
+.product__columns table tr td:nth-child(5){
+    width: 80px;
+}
+
+.table-wrapper ul li {
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+.border  {
+    border-top: 1px solid #111;
+    border-bottom: 1px solid #111;
+}
+
+.purple {
+    background: var(--clr-primary-1);
+    color: #fff;
+}
+
+.block {
+    display: block;
+}
+
+.py {
+    padding-left: 15px;
+    padding-right: 15px;
+}
+
+.px {
+    padding-top: 15px;
+    padding-bottom: 30px;
+}
+
+.sub__wrapper {
+    width: 90vw;
+    margin: 0 auto;
+    max-width: var(--max-width);
+}
+
+.app__top--header div {
+    width: 90vw;
+    margin: 0 auto;
+    max-width: var(--max-width);
+}
+
+@media screen and (min-width: 992px) {
+    .sub__wrapper {
+        width: 95vw;
+    }
+
+    .app__top--header div {
+        width: 95vw;
+    }
+}
+
+.d-flex {
+    display: flex;
+}
+
+.justify-content-between {
+    justify-content: space-between;
+}
+
+.v-600 {
+    width: 600px;
+}
+
+.main__nav li {
+    margin-right: 20px;
+}
+
+.btn {
+display: inline-block;
+background: var(--clr-primary-5);
+color: var(--clr-white);
+padding: 0.25rem 0.75rem;
+border-radius: var(--radius);
+border-color: transparent;
+text-transform: capitalize;
+font-size: 1rem;
+letter-spacing: var(--spacing);
+margin-top: 2rem;
+margin-left: 0.5rem;
+margin-right: 0.5rem;
+cursor: pointer;
+transition: var(--transition);
+}
+.btn:hover {
+background: var(--clr-primary-1);
+color: var(--clr-primary-5);
+}
+/* .item {
+background: var(--clr-white);
+display: flex;
+justify-content: space-between;
+max-width: var(--fixed-width);
+margin: 2rem auto;
+align-items: center;
+border-radius: var(--radius);
+} */
+/* .item button,
+.item a {
+background: transparent;
+border-color: transparent;
+color: var(--clr-primary-5);
+letter-spacing: var(--spacing);
+cursor: pointer;
+}
+.item {
+padding: 1rem 2rem;
+}
+.item h4 {
+margin-bottom: 0;
+}
+.item p {
+margin-bottom: 0;
+} */
+.modal {
+position: absolute;
+top: 2rem;
+left: 50%;
+transform: translateX(-50%);
+background: var(--clr-white);
+display: inline-block;
+padding: 0.25rem 1rem;
+border-radius: var(--radius);
+text-transform: capitalize;
+}
+
+.modal p {
+margin-bottom: 0;
+color: var(--clr-red-dark);
+}
+.form {
+background: var(--clr-white);
+max-width: var(--fixed-width);
+margin: 0 auto;
+margin-bottom: 4rem;
+padding: 1rem 2rem;
+border-radius: var(--radius);
+}
+.form input {
+background: var(--clr-grey-10);
+border-color: transparent;
+border-radius: var(--radius);
+padding: 0.25rem 0.5rem;
+}
+.form-control {
+margin: 0.5rem 0;
+display: grid;
+grid-template-columns: 100px 1fr;
+align-items: center;
+}
+.form button {
+display: inline-block;
+background: var(--clr-black);
+color: var(--clr-white);
+border-color: transparent;
+margin-top: 1rem;
+letter-spacing: var(--spacing);
+padding: 0.15rem 0.25rem;
+text-transform: capitalize;
+border-radius: var(--radius);
+cursor: pointer;
+}
+.nav-links {
+max-width: var(--fixed-width);
+margin: 0 auto;
+margin-bottom: 4rem;
+display: grid;
+grid-template-columns: repeat(3, 1fr);
+}
+.nav-links a {
+color: var(--clr-grey-5);
+}
+.users {
+display: grid;
+grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+gap: 2rem;
+margin: 3rem auto;
+}
+.users li {
+width: 100%;
+display: flex;
+align-items: center;
+background: var(--clr-white);
+padding: 1rem 2rem;
+border-radius: var(--radius);
+text-align: left;
+}
+.users img {
+width: 50px;
+height: 50px;
+border-radius: 50%;
+margin-right: 1rem;
+}
+.users h4 {
+margin-bottom: 0.15rem;
+}
+.users a {
+color: var(--clr-grey-5);
+text-transform: capitalize;
+}
+
+.products {
+margin: 4rem 0;
+display: grid;
+gap: 2rem;
+}
+@media screen and (min-width: 576px) {
+.products {
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+}
+}
+.product {
+background: var(--clr-white);
+border-radius: var(--radius);
+}
+.product img {
+border-top-left-radius: var(--radius);
+border-top-right-radius: var(--radius);
+
+width: 100%;
+height: 15rem;
+object-fit: cover;
+}
+.product h4 {
+margin-top: 1rem;
+}
+
+.product button {
+margin-bottom: 1rem;
+background: var(--clr-primary-5);
+border-radius: var(--radius);
+border-color: transparent;
+color: var(--clr-white);
+padding: 0.25rem 0.5rem;
+text-transform: capitalize;
+cursor: pointer;
+}
+
+
+
+/* The container must be positioned relative: */
+.custom-select {
+    position: relative;
+    font-family: Arial;
+    font-size: var(--font-size);
+  }
+  
+  .custom-select select {
+    display: none; /*hide original SELECT element: */
+  }
+  
+  .select-selected {
+    background-color: DodgerBlue;
+  }
+  
+  /* Style the arrow inside the select element: */
+  .select-selected:after {
+    position: absolute;
+    content: "";
+    top: 14px;
+    right: 10px;
+    width: 0;
+    height: 0;
+    border: 6px solid transparent;
+    border-color: #fff transparent transparent transparent;
+  }
+  
+  /* Point the arrow upwards when the select box is open (active): */
+  .select-selected.select-arrow-active:after {
+    border-color: transparent transparent #fff transparent;
+    top: 7px;
+  }
+  
+  /* style the items (options), including the selected item: */
+  .select-items div,.select-selected {
+    color: #ffffff;
+    padding: 3px 4px;
+    border: 1px solid transparent;
+    border-color: transparent transparent rgba(0, 0, 0, 0.1) transparent;
+    cursor: pointer;
+  }
+  
+  /* Style items (options): */
+  .select-items {
+    position: absolute;
+    background-color: DodgerBlue;
+    top: 100%;
+    left: 0;
+    right: 0;
+    z-index: 99;
+  }
+  
+  /* Hide the items when the select box is closed: */
+  .select-hide {
+    display: none;
+  }
+  
+  .select-items div:hover, .same-as-selected {
+    background-color: rgba(0, 0, 0, 0.1);
+  }
+
+.toggleBtn {
+    border: 1px solid rgb(159, 203, 209);
+    padding: 1px;
+}
+
+.toggleBtn button {
+    border: none;
+    outline: none;
+    padding: 5px 10px;
+    color: #adadad;
+}
+
+.toggleBtn button.active {
+    color: #fff;
+    background: rgb(187, 127, 187);
+}
+
+.options {
+    font-size: var(--font-size);
+    width: 90%;
+    margin: 10px auto;
+    align-items: center;
+
+}
