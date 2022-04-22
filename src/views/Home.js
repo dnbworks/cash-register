@@ -5,6 +5,7 @@ import { AiOutlineTable } from "react-icons/ai";
 import { RiDeleteBin5Line } from "react-icons/ri";
 import Select from '../components/Select';
 import OrderByView from '../components/OrderByView';
+import OrderByAscDec from '../components/OrderByAscDec';
 
 // AiOutlineSortAscending
 // AiOutlineSortDescending
@@ -82,10 +83,7 @@ const Home = () => {
                 <Select/>
               </div>
               <div className="sortby d-flex justify-content-between">
-                <div className="toggleBtn">
-                  <button className='active'>Ascending</button>
-                  <button>Descending</button>
-                </div>
+                <OrderByAscDec/>
               </div>
            </div>
           </div>

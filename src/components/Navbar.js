@@ -6,22 +6,22 @@ const Navbar = () => {
     <nav className='container px'>
       <ul className="main__nav d-flex">
         <li>
-          <Link to="/cart">Home</Link>
+          <Link to="/">Home</Link>
         </li>
         <li>
-          <Link to="/cart">Report</Link>
+          <Link to="/report">Report</Link>
         </li>
         <li>
-          <Link to="/cart">Setting</Link>
+          <Link to="/settings">Settings</Link>
         </li>
         <li>
-          <Link to="/cart">Charts</Link>
+          <Link to="/charts">Charts</Link>
         </li>
         <li>
-          <Link to="/cart">Statistic</Link>
+          <Link to="/statistic">Statistic</Link>
         </li>
         <li>
-          <Link to="/cart">Option</Link>
+          <Link to="/options">Options</Link>
         </li>
       </ul>
     </nav>
