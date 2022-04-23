@@ -6,6 +6,7 @@ import { RiDeleteBin5Line } from "react-icons/ri";
 import Select from '../components/Select';
 import OrderByView from '../components/OrderByView';
 import OrderByAscDec from '../components/OrderByAscDec';
+import Search from '../components/Search';
 
 // AiOutlineSortAscending
 // AiOutlineSortDescending
@@ -16,7 +17,7 @@ const Home = () => {
         <div className="header d-flex border">
           <div className="header__selected--items v-600">
             <ul className="d-flex justify-content-between py">
-              <li><BsPersonCircle/></li>
+              <li onClick={() => console.log('hello worold') }><BsPersonCircle/></li>
               <li>products(2)</li>
               <li><BiHelpCircle/></li>
             </ul>
@@ -24,7 +25,7 @@ const Home = () => {
           <div className="header__products v-600">
             <ul className="d-flex justify-content-between py">
               <li><AiOutlineTable/>All(2)</li>
-              <li><BiSearchAlt2/></li>
+              <li><Search/></li>
             </ul>
           </div>
         </div>

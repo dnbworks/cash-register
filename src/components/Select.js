@@ -80,7 +80,7 @@ const Select = () => {
           document.addEventListener("click", closeAllSelect);
         
         console.log(customDiv.current);
-    });
+    }, []);
 
   return (
     <div className="custom-select" style={{ width: "125px" }} ref={customDiv}>

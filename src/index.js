@@ -4,7 +4,7 @@ import './assets/css/styles.css';
 import App from './App';
 
 import { BrowserRouter as Router } from 'react-router-dom';
-import { AppProvider } from './hooks/Context'
+import { AppProvider } from './context/AppContext'
 
 ReactDOM.render(
   <React.StrictMode>
