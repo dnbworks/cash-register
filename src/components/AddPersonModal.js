@@ -1,14 +1,13 @@
 import { useGlobalContext } from '../context/AppContext';
 import styled from 'styled-components';
-import { Link } from 'react-router-dom';
 import { BiSearchAlt2 } from "react-icons/bi";
 
 const AddPersonModal = () => {
-  // const { isModalOpen, closeModal, modalProduct } = useGlobalContext();
+  const { isModalOpen, openModal, closeModal } = useGlobalContext();
 
-  // if(!isModalOpen){
-  //   return null;
-  // }
+  if(!isModalOpen){
+    return null;
+  }
 
   return (
     <ModalContainer>
@@ -18,11 +17,11 @@ const AddPersonModal = () => {
             <div className="modal__title">CUSTOMER</div>
           </div>
           <form className="modal__form d-flex justify-content-between">
-            <div>
+            <div style={{ width: "200px"}}>
               <label htmlFor="customerName">Customer Name</label>
               <input type="text" id='customerName'/>
             </div>
-            <div>
+            <div style={{ width: "200px"}}>
               <label htmlFor="phone">Phone</label>
               <input type="text" id='phone'/>
             </div>
@@ -34,8 +33,8 @@ const AddPersonModal = () => {
             </ul>
           </div>
           <div className="modal__footer">
-            <button>Add</button>
-            <button>Close</button>
+            <button onClick={() => openModal("add_customer")}>Add</button>
+            <button onClick={() => closeModal("customer")}>Close</button>
           </div>
         </div>
     </ModalContainer>

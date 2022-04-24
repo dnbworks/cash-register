@@ -27,8 +27,8 @@ function App() {
         <Route path="/login" component={LoginPage} />
       </Switch>
       </div>
-      {/* <AddPersonModal/>
-      <AddPersonDetails/> */}
+      <AddPersonModal/>
+      <AddPersonDetails/>
     </div>
   );
 }

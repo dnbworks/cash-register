@@ -8,11 +8,11 @@ import { AppProvider } from './context/AppContext'
 
 ReactDOM.render(
   <React.StrictMode>
-    {/* <AppProvider> */}
+    <AppProvider>
       <Router>
         <App />
       </Router>
-    {/* </AppProvider> */}
+    </AppProvider>
   </React.StrictMode>,
   document.getElementById('root')
 );

@@ -1,23 +1,26 @@
 import React from 'react';
 import { BsPersonCircle } from "react-icons/bs";
-import { BiHelpCircle, BiSearchAlt2 } from "react-icons/bi";
+import { BiHelpCircle } from "react-icons/bi";
 import { AiOutlineTable } from "react-icons/ai";
 import { RiDeleteBin5Line } from "react-icons/ri";
 import Select from '../components/Select';
 import OrderByView from '../components/OrderByView';
 import OrderByAscDec from '../components/OrderByAscDec';
 import Search from '../components/Search';
+import { useGlobalContext } from '../context/AppContext';
+import ItemsList from '../components/ItemsList';
 
 // AiOutlineSortAscending
 // AiOutlineSortDescending
 
 const Home = () => {
+  const { openModal } = useGlobalContext();
   return (
     <div className="container">
         <div className="header d-flex border">
           <div className="header__selected--items v-600">
             <ul className="d-flex justify-content-between py">
-              <li onClick={() => console.log('hello worold') }><BsPersonCircle/></li>
+              <li onClick={() => openModal("customer")}><BsPersonCircle/></li>
               <li>products(2)</li>
               <li><BiHelpCircle/></li>
             </ul>
@@ -41,7 +44,7 @@ const Home = () => {
                 <li>Del</li>
               </ul>
               <div className="table-wrapper">
-                <ul className="item d-flex justify-content-between">
+                <ul className="item d-flex justify-content-between purple">
                   <li width="150px">Designer Hand Grip</li>
                   <li>26.05</li>
                   <li>1</li>
@@ -87,6 +90,9 @@ const Home = () => {
                 <OrderByAscDec/>
               </div>
            </div>
+
+           <ItemsList/>
+           
           </div>
         </div>
       </div>

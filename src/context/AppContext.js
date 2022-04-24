@@ -20,7 +20,7 @@ const initialState = {
     amount: 0,
     storeProducts: [],
     isModalOpen: false,
-    modalProduct: null,
+    isAddPersonModalOpen: false,
     cartSubTotal: 0,
     cartTax: 0,
     cartTotal: 0
@@ -34,12 +34,11 @@ const AppProvider = ({ children }) => {
       return product;
     }
 
-
     const openModal = id => {
-      dispatch({ type: 'OPEN_MODAL', payload: getItem(id) })
+      dispatch({ type: 'OPEN_MODAL', payload: id })
     };
-    const closeModal = () => {
-      dispatch({ type: 'CLOSE_MODAL' })
+    const closeModal = id => {
+      dispatch({ type: 'CLOSE_MODAL', payload: id })
     };
 
     const clearCart = () => {

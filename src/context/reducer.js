@@ -13,10 +13,16 @@ const reducer = (state, action) => {
     return { ...state, cart: [...state.cart, product ], loading: false }
   }
   if (action.type === 'OPEN_MODAL') {
-    return { ...state, isModalOpen: true, modalProduct: action.payload, loading: false }
+    if(action.payload == "customer"){
+      return { ...state, isModalOpen: true }
+    }
+    return { ...state, isAddPersonModalOpen: true }
   }
   if (action.type === 'CLOSE_MODAL') {
-    return { ...state, isModalOpen: false, modalProduct: null, loading: false }
+    if(action.payload == "customer"){
+      return { ...state, isModalOpen: false }
+    }
+    return { ...state, isAddPersonModalOpen: false }
   }
   if (action.type === 'CLEAR_CART') {
     return { ...state, cart: [] }
