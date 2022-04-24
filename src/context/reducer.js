@@ -13,14 +13,22 @@ const reducer = (state, action) => {
     return { ...state, cart: [...state.cart, product ], loading: false }
   }
   if (action.type === 'OPEN_MODAL') {
+    // console.log(typeof action.payload === "number");
     if(action.payload == "customer"){
       return { ...state, isModalOpen: true }
+    }
+    if(typeof action.payload === "number"){
+      const item = state.storeProducts.find(item => item.id === action.payload)
+      return { ...state, isOpenSelectedModal: true, selectedItem: item  }
     }
     return { ...state, isAddPersonModalOpen: true }
   }
   if (action.type === 'CLOSE_MODAL') {
     if(action.payload == "customer"){
       return { ...state, isModalOpen: false }
+    }
+    if(typeof action.payload === "number"){
+      return { ...state, isOpenSelectedModal: false, selectedItem: null }
     }
     return { ...state, isAddPersonModalOpen: false }
   }

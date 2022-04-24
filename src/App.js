@@ -10,6 +10,8 @@ import Statistic from './views/Statistic';
 import Options from './views/Options';
 import LoginPage from './views/LoginPage';
 import AddPersonDetails from './components/AddPersonDetails';
+import SelectedItemModal from './components/SelectedItemModal';
+
 
 function App() {
   return (
@@ -29,6 +31,7 @@ function App() {
       </div>
       <AddPersonModal/>
       <AddPersonDetails/>
+      <SelectedItemModal/>
     </div>
   );
 }

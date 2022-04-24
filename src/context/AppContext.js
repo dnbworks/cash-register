@@ -2,7 +2,7 @@ import React, { useContext, useReducer, useEffect } from 'react'
 
 import reducer from './reducer';
 
-const url = 'http://localhost:3001/storeProducts';
+const url = 'http://localhost:3001/products';
 const AppContext = React.createContext();
 
 const getLocalStorage = () => {
@@ -21,6 +21,8 @@ const initialState = {
     storeProducts: [],
     isModalOpen: false,
     isAddPersonModalOpen: false,
+    isOpenSelectedModal: false,
+    selectedItem: null,
     cartSubTotal: 0,
     cartTax: 0,
     cartTotal: 0
@@ -62,6 +64,7 @@ const AppProvider = ({ children }) => {
       try{
         const response = await fetch(url)
         const cart = await response.json()
+        console.log(cart);
         dispatch({ type: 'DISPLAY_ITEMS', payload: cart });
       } catch(err){
         throw new Error(err);

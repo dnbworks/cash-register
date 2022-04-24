@@ -8,7 +8,7 @@ const Search = () => {
   }
   return (
     <div className='d-flex'>
-        <form onSubmit={handleSubmit} className={`${!toggle && "hidden"}`}>
+        <form onSubmit={handleSubmit} className={`modal__form ${!toggle && "hidden"}`}>
             <input type="text" value={text} onChange={(e) => setText(e.target.value)}/>
         </form>
         <span onClick={() => setToggle(!toggle)}><BiSearchAlt2/></span>

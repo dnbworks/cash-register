@@ -1,0 +1,39 @@
+{
+    "products": [
+      {
+        "id": 1,
+        "name": "Moen Home Care Brushed Nickel 9\" Designer Hand Grip",
+        "img": "/img/moen.jpg",
+        "price": 26.40,
+        "weight": 2,
+        "category": "Grabs"
+      },
+      {
+        "id": 2,
+        "name": "Moen Home Care Stainless 18\" Exposed Screw Grab Bar",
+        "img": "/img/moen1.jpg",
+        "price": 23.25,
+        "weight": 4,
+        "category": "Grabs"
+      }
+    ],
+    "selectedProducts": [
+      {
+        "id": 2,
+        "name": "Moen Home Care Stainless 18\" Exposed Screw Grab Bar",
+        "price": 23.25,
+        "qty": 0,
+        "discount": 0.00,
+        "total": 0.00
+      },
+      {
+        "id": 3,
+        "name": "Moen Exposed Screw Grab Bar",
+        "price": 24.60,
+        "qty": 0,
+        "discount": 0.00,
+        "total": 0.00
+      }
+      
+    ]
+  }
