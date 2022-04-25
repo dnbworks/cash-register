@@ -1,13 +1,43 @@
-import React, { useState } from 'react'
+import React, { useState, useRef, useEffect } from 'react'
 import { useGlobalContext } from '../context/AppContext';
 import styled from 'styled-components';
 
 const SelectedItemModal = () => {
   const [quantity, setQuantity ] = useState(0)
-  const { openModal, closeModal, isOpenSelectedModal, selectedItem } = useGlobalContext();
+  const [error, setError ] = useState("")
+  const { closeModal, selectedItem } = useGlobalContext();
 
-  if(!isOpenSelectedModal){
-    return null;
+  const inputRef = useRef(null);
+  // const regex = /^[1-9]+$/;
+  const regex = /^[1-9][0-9]*$/;
+  
+
+  useEffect(() => {
+    inputRef.current.setSelectionRange(0, 0);
+    inputRef.current.focus();
+  });
+
+  const handleChange = (e) => {
+    // console.log(e.target.value);
+  
+
+    if(regex.test(e.target.value)){
+      setQuantity(undefined)
+      setQuantity(e.target.value)
+      setError("");
+    } 
+
+    if(!regex.test(e.target.value)){
+      setQuantity(undefined)
+      setError("Please no zero and negative number");
+    }
+   
+    if(e.target.value === ""){
+      setQuantity(undefined)
+      setError("Please enter a number");
+    }
+
+    
   }
 
   return (
@@ -24,7 +54,8 @@ const SelectedItemModal = () => {
             </div>
             <div style={{ width: "200px"}}>
               <label htmlFor="quantity">Quantity</label>
-              <input type="number" id='quantity' value={quantity} onChange={(e) => setQuantity(e.target.value)}/>
+              <input type="text" id='quantity' value={quantity} ref={inputRef} onChange={handleChange}/>
+              { error && (<p>{error}</p>)}
             </div>
             <div className="modal__footer">
                 <button onClick={() => {}}>OK</button>

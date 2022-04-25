@@ -88,7 +88,7 @@ const AppProvider = ({ children }) => {
     useEffect(() => {
       localStorage.setItem('cart', JSON.stringify(state.cart));
       dispatch({ type: 'GET_TOTALS' });
-      console.log('amount changed');
+      // console.log('amount changed');
     }, [state.cart])
     return (
       <AppContext.Provider

@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react'
+import React, { useState } from 'react'
 import { BiSearchAlt2 } from "react-icons/bi";
 const Search = () => {
   const [text, setText] = useState("");

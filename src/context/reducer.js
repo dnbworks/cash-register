@@ -81,7 +81,7 @@ const reducer = (state, action) => {
     cartSubTotal = parseFloat(cartSubTotal).toFixed(2);
     const cartTax = parseFloat(cartSubTotal * 0.1).toFixed(2);
     const cartTotal = (parseFloat(cartSubTotal) + parseFloat(cartTax)).toFixed(2);
-    console.log(typeof(cartSubTotal));
+    // console.log(typeof(cartSubTotal));
 
     return { ...state, cartSubTotal, cartTax, cartTotal, amount }
   }

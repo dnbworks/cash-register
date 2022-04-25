@@ -1,4 +1,4 @@
-import React, { useRef, useState, useEffect } from 'react';
+import React, { useRef, useEffect } from 'react';
 
 const Select = () => {
     const customSelect = useRef(null);
@@ -79,7 +79,7 @@ const Select = () => {
           then close all select boxes: */
           document.addEventListener("click", closeAllSelect);
         
-        console.log(customDiv.current);
+        // console.log(customDiv.current);
     }, []);
 
   return (

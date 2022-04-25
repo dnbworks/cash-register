@@ -11,9 +11,10 @@ import Options from './views/Options';
 import LoginPage from './views/LoginPage';
 import AddPersonDetails from './components/AddPersonDetails';
 import SelectedItemModal from './components/SelectedItemModal';
-
+import { useGlobalContext } from './context/AppContext';
 
 function App() {
+  const { isOpenSelectedModal } = useGlobalContext();
   return (
     <div className='wrapper'>
       <Header/>
@@ -31,7 +32,7 @@ function App() {
       </div>
       <AddPersonModal/>
       <AddPersonDetails/>
-      <SelectedItemModal/>
+      { isOpenSelectedModal && <SelectedItemModal/> }
     </div>
   );
 }
