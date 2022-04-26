@@ -75,10 +75,8 @@ const AppProvider = ({ children }) => {
       dispatch({ type: 'TOGGLE_AMOUNT', payload: { id, type } })
     }
 
-    const add_to_cart = (event, product) => {
-      event.preventDefault();
-      const item = getItem(product.id);
-      dispatch({ type: 'ADD_TO_CART', payload: { ...product, item } });
+    const add_to_cart = (product, quantity) => {
+      dispatch({ type: 'ADD_TO_CART', payload: { product, quantity } });
     }
     
     useEffect(() => {
@@ -88,7 +86,6 @@ const AppProvider = ({ children }) => {
     useEffect(() => {
       localStorage.setItem('cart', JSON.stringify(state.cart));
       dispatch({ type: 'GET_TOTALS' });
-      // console.log('amount changed');
     }, [state.cart])
     return (
       <AppContext.Provider

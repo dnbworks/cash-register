@@ -158,6 +158,11 @@ table {
     min-height: 260px;
 }
 
+.table-wrapper__selected--items ul:nth-child(odd){
+    background: var(--clr-primary-1);
+    color: #fff;
+}
+
 .product__columns ul.header__title {
     margin: 8px 0;
 }

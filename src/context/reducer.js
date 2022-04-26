@@ -1,16 +1,39 @@
+// const inArray = (identifer, items) => {
+//   var count = items.length;
+//   for(var i=0; i<count; i++) {
+//       if(items[i].id === identifer) return true;
+//   }
+//   return false;
+// }
+
+import { InArray } from "../utils/InArray";
+
 const reducer = (state, action) => {
 
   if (action.type === 'ADD_TO_CART') {
-    const tempProducts = [...state.storeProducts];
-    const index = state.storeProducts.indexOf(action.payload.item);
-    const product = tempProducts[index];
+    const product = action.payload.product;
+    console.log(state.cart.indexOf(action.payload.product) <= -1);
+    console.log(state.cart);
     console.log(product);
-    product.inCart = true;
-    product.count = action.payload.quantity;
-    const price = product.price * product.count;
-    product.total = price;
-    product.size = action.payload.size;
-    return { ...state, cart: [...state.cart, product ], loading: false }
+
+    if(!InArray(product.id, state.cart)){
+      product.qty = action.payload.quantity;
+      product.discount = 0.00;
+      const price = product.price * product.qty;
+      product.total = price;
+      return { ...state, cart: [...state.cart, product ], isOpenSelectedModal: false }
+    } 
+
+    let tempCart = state.cart.map((cartItem) => {
+      if (cartItem.id === action.payload.product.id) {
+        const qty = parseInt(cartItem.qty) + parseInt(action.payload.quantity);
+        const itemTotal = (qty * cartItem.price).toFixed(2);
+        return { ...cartItem, qty, total: itemTotal }
+      }
+      return cartItem
+    })
+    return { ...state, cart: tempCart, isOpenSelectedModal: false }
+  
   }
   if (action.type === 'OPEN_MODAL') {
     // console.log(typeof action.payload === "number");

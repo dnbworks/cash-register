@@ -5,7 +5,7 @@ import styled from 'styled-components';
 const SelectedItemModal = () => {
   const [quantity, setQuantity ] = useState(0)
   const [error, setError ] = useState("")
-  const { closeModal, selectedItem } = useGlobalContext();
+  const { closeModal, selectedItem, add_to_cart } = useGlobalContext();
 
   const inputRef = useRef(null);
   // const regex = /^[1-9]+$/;
@@ -18,8 +18,6 @@ const SelectedItemModal = () => {
   });
 
   const handleChange = (e) => {
-    // console.log(e.target.value);
-  
 
     if(regex.test(e.target.value)){
       setQuantity(undefined)
@@ -37,7 +35,13 @@ const SelectedItemModal = () => {
       setError("Please enter a number");
     }
 
-    
+  }
+
+  const handleAddToCartBtn = (e) => {
+    e.preventDefault();
+    if (error === "" && quantity >= 1) {
+      add_to_cart(selectedItem, quantity)
+    }
   }
 
   return (
@@ -58,7 +62,7 @@ const SelectedItemModal = () => {
               { error && (<p>{error}</p>)}
             </div>
             <div className="modal__footer">
-                <button onClick={() => {}}>OK</button>
+                <button onClick={handleAddToCartBtn}>OK</button>
                 <button onClick={() => {
                   closeModal(selectedItem.id)
                   setQuantity(0)
