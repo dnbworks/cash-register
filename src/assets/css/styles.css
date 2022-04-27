@@ -149,7 +149,8 @@ table {
 /*  global classes */
 
 .app__top--header {
-    background-image: linear-gradient(rgba(247, 206, 255, 0.685), rgba(250, 238, 252, 0.815));
+    /* background-image: linear-gradient(rgba(247, 206, 255, 0.685), rgba(250, 238, 252, 0.815)); */
+    background: linear-gradient(180deg, rgba(255,220,243,1) 0%, rgba(241,219,233,1) 51%, rgba(255,255,255,0.5214460784313726) 100%);
     padding: 15px 0;
 } 
 
@@ -679,4 +680,14 @@ cursor: pointer;
 .item_product .item__price {
     margin-left: 3px;
     padding: 2px 3px;
+}
+
+.edit-btn {
+    display: inline-block;
+    background: rgb(126, 200, 235);
+    border-radius: 4px;
+    color: #111;
+    width: 40px;
+    text-align: center;
+    cursor: default;
 }

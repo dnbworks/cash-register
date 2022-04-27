@@ -20,6 +20,7 @@ const initialState = {
     amount: 0,
     storeProducts: [],
     isModalOpen: false,
+    edit: false,
     isAddPersonModalOpen: false,
     isOpenSelectedModal: false,
     selectedItem: null,
@@ -59,12 +60,16 @@ const AppProvider = ({ children }) => {
       dispatch({ type: 'DECREASE', payload: id })
     }
 
+    const editQty = (product, quantity) => {
+      dispatch({ type: 'EDIT_QTY', payload: { product, quantity} })
+    }
+
     const fetchData = async () => {
       dispatch({ type: 'LOADING' })
       try{
         const response = await fetch(url)
         const cart = await response.json()
-        console.log(cart);
+        // console.log(cart);
         dispatch({ type: 'DISPLAY_ITEMS', payload: cart });
       } catch(err){
         throw new Error(err);
@@ -98,7 +103,8 @@ const AppProvider = ({ children }) => {
           toggleAmount,
           add_to_cart,
           openModal,
-          closeModal
+          closeModal,
+          editQty
         }}
       >
         {children}

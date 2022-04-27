@@ -1,0 +1,12 @@
+1. totals
+2. clear
+3. discount
+4. list
+5. all categories
+6. search
+7. sort by
+7. add customer
+8. pay
+8. calculator
+9. order list
+10. invoice

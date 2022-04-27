@@ -34,6 +34,14 @@
         "discount": 0.00,
         "total": 0.00
       }
-      
+    ],
+    "customers": [
+      {
+        "id": 1,
+        "firstname": "",
+        "lastname": "",
+        "email": "",
+        "phone": ""
+      }
     ]
   }

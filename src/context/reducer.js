@@ -1,27 +1,17 @@
-// const inArray = (identifer, items) => {
-//   var count = items.length;
-//   for(var i=0; i<count; i++) {
-//       if(items[i].id === identifer) return true;
-//   }
-//   return false;
-// }
-
 import { InArray } from "../utils/InArray";
 
 const reducer = (state, action) => {
 
   if (action.type === 'ADD_TO_CART') {
-    const product = action.payload.product;
-    console.log(state.cart.indexOf(action.payload.product) <= -1);
-    console.log(state.cart);
-    console.log(product);
+    const tempProducts = [...state.storeProducts];
+    const index = state.storeProducts.indexOf(action.payload.product);
+    const product = tempProducts[index];
 
     if(!InArray(product.id, state.cart)){
-      product.qty = action.payload.quantity;
-      product.discount = 0.00;
-      const price = product.price * product.qty;
-      product.total = price;
-      return { ...state, cart: [...state.cart, product ], isOpenSelectedModal: false }
+      const item = { id: product.id, name: product.name, price: product.price, qty: action.payload.quantity, discount: 0.00 }
+      const price = item.price * item.qty;
+      item.total = price;
+      return { ...state, cart: [...state.cart, item ], isOpenSelectedModal: false }
     } 
 
     let tempCart = state.cart.map((cartItem) => {
@@ -35,8 +25,8 @@ const reducer = (state, action) => {
     return { ...state, cart: tempCart, isOpenSelectedModal: false }
   
   }
+
   if (action.type === 'OPEN_MODAL') {
-    // console.log(typeof action.payload === "number");
     if(action.payload == "customer"){
       return { ...state, isModalOpen: true }
     }
@@ -44,8 +34,29 @@ const reducer = (state, action) => {
       const item = state.storeProducts.find(item => item.id === action.payload)
       return { ...state, isOpenSelectedModal: true, selectedItem: item  }
     }
+    if(action.payload.type === "qty"){
+      const item = state.cart.find(item => item.id === action.payload.id)
+      return { ...state, isOpenSelectedModal: true, selectedItem: item, edit: true  }
+    }
+    // if(action.payload.type === "discount"){
+    //   const item = state.storeProducts.find(item => item.id === action.payload.id)
+    //   return { ...state, isOpenSelectedModal: true, selectedItem: item  }
+    // }
     return { ...state, isAddPersonModalOpen: true }
   }
+
+  if (action.type === 'EDIT_QTY') {
+    let tempCart = state.cart.map((cartItem) => {
+      if (cartItem.id === action.payload.product.id) {
+        const qty = parseInt(action.payload.quantity);
+        const itemTotal = (qty * cartItem.price).toFixed(2);
+        return { ...cartItem, qty, total: itemTotal }
+      }
+      return cartItem
+    })
+    return { ...state, cart: tempCart, isOpenSelectedModal: false, edit: false }
+  }
+
   if (action.type === 'CLOSE_MODAL') {
     if(action.payload == "customer"){
       return { ...state, isModalOpen: false }
@@ -55,15 +66,18 @@ const reducer = (state, action) => {
     }
     return { ...state, isAddPersonModalOpen: false }
   }
+
   if (action.type === 'CLEAR_CART') {
     return { ...state, cart: [] }
   }
+
   if (action.type === 'REMOVE') {
     return {
       ...state,
       cart: state.cart.filter((cartItem) => cartItem.id !== action.payload),
     }
   }
+
   if (action.type === 'INCREASE') {
     let tempCart = state.cart.map((cartItem) => {
       if (cartItem.id === action.payload) {
@@ -75,6 +89,7 @@ const reducer = (state, action) => {
     })
     return { ...state, cart: tempCart }
   }
+
   if (action.type === 'DECREASE') {
     let tempCart = state.cart
       .map((cartItem) => {
@@ -88,6 +103,7 @@ const reducer = (state, action) => {
       .filter((cartItem) => cartItem.count !== 0)
     return { ...state, cart: tempCart }
   }
+
   if (action.type === 'GET_TOTALS') {
     let { cartSubTotal, amount } = state.cart.reduce(
       (cartTotal, cartItem) => {
@@ -108,12 +124,15 @@ const reducer = (state, action) => {
 
     return { ...state, cartSubTotal, cartTax, cartTotal, amount }
   }
+
   if (action.type === 'LOADING') {
     return { ...state, loading: true }
   }
+
   if (action.type === 'DISPLAY_ITEMS') {
     return { ...state, storeProducts: action.payload, loading: false }
   }
+
   if (action.type === 'TOGGLE_AMOUNT') {
     let tempCart = state.cart
       .map((cartItem) => {

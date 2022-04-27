@@ -3,12 +3,13 @@ import { useGlobalContext } from '../context/AppContext';
 import styled from 'styled-components';
 
 const SelectedItemModal = () => {
-  const [quantity, setQuantity ] = useState(0)
+  const { closeModal, selectedItem, add_to_cart, editQty, edit } = useGlobalContext();
+
+  const [quantity, setQuantity ] = useState(selectedItem.qty ? selectedItem.qty : 0)
   const [error, setError ] = useState("")
-  const { closeModal, selectedItem, add_to_cart } = useGlobalContext();
 
   const inputRef = useRef(null);
-  // const regex = /^[1-9]+$/;
+
   const regex = /^[1-9][0-9]*$/;
   
 
@@ -40,7 +41,12 @@ const SelectedItemModal = () => {
   const handleAddToCartBtn = (e) => {
     e.preventDefault();
     if (error === "" && quantity >= 1) {
-      add_to_cart(selectedItem, quantity)
+      if(edit){
+        editQty(selectedItem, quantity)
+      } else {
+        add_to_cart(selectedItem, quantity)
+      }
+      setQuantity(0);
     }
   }
 
