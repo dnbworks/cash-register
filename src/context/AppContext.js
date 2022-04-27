@@ -21,6 +21,7 @@ const initialState = {
     storeProducts: [],
     isModalOpen: false,
     edit: false,
+    discountModal: true,
     isAddPersonModalOpen: false,
     isOpenSelectedModal: false,
     selectedItem: null,

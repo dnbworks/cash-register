@@ -1,3 +1,4 @@
+0. discount
 1. totals
 2. clear
 3. discount
