@@ -3,48 +3,45 @@ import { useGlobalContext } from '../context/AppContext';
 import styled from 'styled-components';
 
 const DiscountModal = () => {
-    const { closeModal, selectedItem, add_to_cart, editQty, edit } = useGlobalContext();
-    const [discount, setDiscount] = useState(0.00)
+    const { closeModal, selectedItem, editQty } = useGlobalContext();
+    console.log(String(selectedItem.discount).length);
+    const [discount, setDiscount] = useState(selectedItem.discount ? selectedItem.discount : "0.00")
     const [option, setOption] = useState("amount")
     const [error, setError ] = useState("")
     const inputRef = useRef(null);
 
+    const regex = /^[0-9]+\.[0-9]{2}$/;
+
     const handleChange = (e) => {
 
-        // if(regex.test(e.target.value)){
-        //   setQuantity(undefined)
-        //   setQuantity(e.target.value)
-        //   setError("");
-        // } 
+        if(regex.test(e.target.value)){
+          setDiscount(e.target.value)
+          setError("");
+        } 
     
-        // if(!regex.test(e.target.value)){
-        //   setQuantity(undefined)
-        //   setError("Please no zero and negative number");
-        // }
+        if(!regex.test(e.target.value)){
+          setDiscount(undefined)
+          setError("Please no zero and negative number");
+        }
        
-        // if(e.target.value === ""){
-        //   setQuantity(undefined)
-        //   setError("Please enter a number");
-        // }
+        if(e.target.value === ""){
+          setDiscount(undefined)
+          setError("Please enter a number");
+        }
     
     }
 
-    const handleAddToCartBtn = (e) => {
+    const handleEdit = (e) => {
         e.preventDefault();
-        // if (error === "" && quantity >= 1) {
-        //   if(edit){
-        //     editQty(selectedItem, quantity)
-        //   } else {
-        //     add_to_cart(selectedItem, quantity)
-        //   }
-        //   setQuantity(0);
-        // }
+        editQty(selectedItem, discount);
+        setDiscount(0)
     }
 
     useEffect(() => {
         inputRef.current.setSelectionRange(0, 0);
         inputRef.current.focus();
     });
+
   return (
     <ModalContainer>
     <div className='modal__input--Qty'>
@@ -66,9 +63,9 @@ const DiscountModal = () => {
               { error && (<p>{error}</p>)}
             </div>
             <div className="modal__footer">
-                <button onClick={handleAddToCartBtn}>OK</button>
+                <button onClick={handleEdit}>OK</button>
                 <button onClick={() => {
-                  closeModal(selectedItem.id)
+                  closeModal("discount")
                   setDiscount(0)
                 }}>Cancel</button>
             </div>

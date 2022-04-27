@@ -8,7 +8,7 @@ const reducer = (state, action) => {
     const product = tempProducts[index];
 
     if(!InArray(product.id, state.cart)){
-      const item = { id: product.id, name: product.name, price: product.price, qty: action.payload.quantity, discount: 0.00 }
+      const item = { id: product.id, name: product.name, price: product.price, qty: action.payload.quantity, discount: "0.00" }
       const price = item.price * item.qty;
       item.total = price;
       return { ...state, cart: [...state.cart, item ], isOpenSelectedModal: false }
@@ -38,23 +38,23 @@ const reducer = (state, action) => {
       const item = state.cart.find(item => item.id === action.payload.id)
       return { ...state, isOpenSelectedModal: true, selectedItem: item, edit: true  }
     }
-    // if(action.payload.type === "discount"){
-    //   const item = state.storeProducts.find(item => item.id === action.payload.id)
-    //   return { ...state, isOpenSelectedModal: true, selectedItem: item  }
-    // }
+    if(action.payload.type === "discount"){
+      const item = state.cart.find(item => item.id === action.payload.id)
+      return { ...state, discountModal: true, selectedItem: item  }
+    }
     return { ...state, isAddPersonModalOpen: true }
   }
 
   if (action.type === 'EDIT_QTY') {
     let tempCart = state.cart.map((cartItem) => {
       if (cartItem.id === action.payload.product.id) {
-        const qty = parseInt(action.payload.quantity);
-        const itemTotal = (qty * cartItem.price).toFixed(2);
-        return { ...cartItem, qty, total: itemTotal }
+        let discount = parseFloat(action.payload.discount);
+        const itemTotal = (discount * cartItem.price).toFixed(2);
+        return { ...cartItem, discount: String(discount).length <= 3 ? discount + ".00" : discount, total: itemTotal }
       }
       return cartItem
     })
-    return { ...state, cart: tempCart, isOpenSelectedModal: false, edit: false }
+    return { ...state, cart: tempCart, discountModal: false, edit: false }
   }
 
   if (action.type === 'CLOSE_MODAL') {
@@ -63,6 +63,9 @@ const reducer = (state, action) => {
     }
     if(typeof action.payload === "number"){
       return { ...state, isOpenSelectedModal: false, selectedItem: null }
+    }
+    if(action.payload == "discount"){
+      return { ...state, discountModal: false, selectedItem: null}
     }
     return { ...state, isAddPersonModalOpen: false }
   }

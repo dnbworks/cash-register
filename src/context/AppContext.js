@@ -21,7 +21,7 @@ const initialState = {
     storeProducts: [],
     isModalOpen: false,
     edit: false,
-    discountModal: true,
+    discountModal: false,
     isAddPersonModalOpen: false,
     isOpenSelectedModal: false,
     selectedItem: null,
@@ -61,8 +61,8 @@ const AppProvider = ({ children }) => {
       dispatch({ type: 'DECREASE', payload: id })
     }
 
-    const editQty = (product, quantity) => {
-      dispatch({ type: 'EDIT_QTY', payload: { product, quantity} })
+    const editQty = (product, discount) => {
+      dispatch({ type: 'EDIT_QTY', payload: { product, discount} })
     }
 
     const fetchData = async () => {
