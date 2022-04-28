@@ -237,13 +237,13 @@ table {
 }
 
 .sub__wrapper {
-    width: 90vw;
+    width: 95vw;
     margin: 0 auto;
     max-width: var(--max-width);
 }
 
 .app__top--header div {
-    width: 90vw;
+    width: 95vw;
     margin: 0 auto;
     max-width: var(--max-width);
 }

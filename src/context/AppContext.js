@@ -61,8 +61,12 @@ const AppProvider = ({ children }) => {
       dispatch({ type: 'DECREASE', payload: id })
     }
 
-    const editQty = (product, discount) => {
-      dispatch({ type: 'EDIT_QTY', payload: { product, discount} })
+    const editDiscount = (product, discount) => {
+      dispatch({ type: 'EDIT_DISCOUNT', payload: { product, discount} })
+    }
+
+    const editQty = (product, quantity) => {
+      dispatch({ type: 'EDIT_QTY', payload: { product, quantity} })
     }
 
     const fetchData = async () => {
@@ -105,6 +109,7 @@ const AppProvider = ({ children }) => {
           add_to_cart,
           openModal,
           closeModal,
+          editDiscount,
           editQty
         }}
       >

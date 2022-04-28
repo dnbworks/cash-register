@@ -3,7 +3,7 @@ import { useGlobalContext } from '../context/AppContext';
 import styled from 'styled-components';
 
 const DiscountModal = () => {
-    const { closeModal, selectedItem, editQty } = useGlobalContext();
+    const { closeModal, selectedItem, editDiscount } = useGlobalContext();
     console.log(String(selectedItem.discount).length);
     const [discount, setDiscount] = useState(selectedItem.discount ? selectedItem.discount : "0.00")
     const [option, setOption] = useState("amount")
@@ -33,7 +33,7 @@ const DiscountModal = () => {
 
     const handleEdit = (e) => {
         e.preventDefault();
-        editQty(selectedItem, discount);
+        editDiscount(selectedItem, discount);
         setDiscount(0)
     }
 

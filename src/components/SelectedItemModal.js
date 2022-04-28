@@ -42,6 +42,7 @@ const SelectedItemModal = () => {
     e.preventDefault();
     if (error === "" && quantity >= 1) {
       if(edit){
+        console.log(quantity);
         editQty(selectedItem, quantity)
       } else {
         add_to_cart(selectedItem, quantity)

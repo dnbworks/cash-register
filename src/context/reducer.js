@@ -8,7 +8,7 @@ const reducer = (state, action) => {
     const product = tempProducts[index];
 
     if(!InArray(product.id, state.cart)){
-      const item = { id: product.id, name: product.name, price: product.price, qty: action.payload.quantity, discount: "0.00" }
+      const item = { id: product.id, name: product.name, price: product.price, qty: action.payload.quantity, discount: "0.00", totalDisc: "0.00" }
       const price = item.price * item.qty;
       item.total = price;
       return { ...state, cart: [...state.cart, item ], isOpenSelectedModal: false }
@@ -18,7 +18,9 @@ const reducer = (state, action) => {
       if (cartItem.id === action.payload.product.id) {
         const qty = parseInt(cartItem.qty) + parseInt(action.payload.quantity);
         const itemTotal = (qty * cartItem.price).toFixed(2);
-        return { ...cartItem, qty, total: itemTotal }
+        const TotalDiscount = (cartItem.discount * qty).toFixed(2);
+        const total = (itemTotal - TotalDiscount).toFixed(2);
+        return { ...cartItem, qty, total, totalDisc: TotalDiscount }
       }
       return cartItem
     })
@@ -40,22 +42,39 @@ const reducer = (state, action) => {
     }
     if(action.payload.type === "discount"){
       const item = state.cart.find(item => item.id === action.payload.id)
-      return { ...state, discountModal: true, selectedItem: item  }
+      return { ...state, discountModal: true, selectedItem: item, edit: true  }
     }
     return { ...state, isAddPersonModalOpen: true }
   }
 
-  if (action.type === 'EDIT_QTY') {
+  if (action.type === 'EDIT_DISCOUNT') {
     let tempCart = state.cart.map((cartItem) => {
       if (cartItem.id === action.payload.product.id) {
         let discount = parseFloat(action.payload.discount);
-        const itemTotal = (discount * cartItem.price).toFixed(2);
-        return { ...cartItem, discount: String(discount).length <= 3 ? discount + ".00" : discount, total: itemTotal }
+        const TotalDiscount = (discount * cartItem.qty).toFixed(2);
+        const itemTotal = (cartItem.qty * cartItem.price);
+        const total = (itemTotal - TotalDiscount).toFixed(2);
+        return { ...cartItem, discount: String(discount).length <= 3 ? discount + ".00" : discount, total, totalDisc: String(TotalDiscount).length <= 3 ? TotalDiscount + ".00" : TotalDiscount }
       }
       return cartItem
     })
     return { ...state, cart: tempCart, discountModal: false, edit: false }
   }
+
+  if (action.type === 'EDIT_QTY') {
+    let tempCart = state.cart.map((cartItem) => {
+      if (cartItem.id === action.payload.product.id) {
+        let qty = action.payload.quantity;
+        const TotalDiscount = (cartItem.discount * qty).toFixed(2);
+        const itemTotal = (qty * cartItem.price);
+        const total = (itemTotal - TotalDiscount).toFixed(2);
+        return { ...cartItem, qty, total, totalDisc: String(TotalDiscount).length <= 3 ? TotalDiscount + ".00" : TotalDiscount }
+      }
+      return cartItem
+    })
+    return { ...state, cart: tempCart, discountModal: false, edit: false, isOpenSelectedModal: false }
+  }
+
 
   if (action.type === 'CLOSE_MODAL') {
     if(action.payload == "customer"){

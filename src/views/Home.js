@@ -40,6 +40,7 @@ const Home = () => {
                 <li>price</li>
                 <li>Qty</li>
                 <li>Discount</li>
+                <li>Total Disc</li>
                 <li>Total</li>
                 <li>Del</li>
               </ul>
