@@ -3,10 +3,8 @@ import { useGlobalContext } from '../context/AppContext';
 import styled from 'styled-components';
 
 const DiscountModal = () => {
-    const { closeModal, selectedItem, editDiscount } = useGlobalContext();
-    console.log(String(selectedItem.discount).length);
+    const { closeModal, selectedItem, editDiscount, cashOptionEntity, changeCashEntity } = useGlobalContext();
     const [discount, setDiscount] = useState(selectedItem.discount ? selectedItem.discount : "0.00")
-    const [option, setOption] = useState("amount")
     const [error, setError ] = useState("")
     const inputRef = useRef(null);
 
@@ -51,14 +49,15 @@ const DiscountModal = () => {
         </div>
         <div className="choose">
             <p>Please choose one the the following options</p>
-            <div className='d-flex'>
-                <button>Amount</button>
-                <button>Percent</button>
+            <div className='d-flex tab-btns justify-content-between'>
+                <button onClick={ () => changeCashEntity("amount") } className={`${cashOptionEntity === "amount" ? "active-btn" : ""}`}>Amount</button>
+                <button  onClick={ () => changeCashEntity("percent") } className={`${cashOptionEntity === "percent" ? "active-btn" : ""}`}>Percent</button>
             </div>
         </div>
         <form className="modal__form d-flex justify-content-between">
             <div style={{ width: "200px"}}>
               <label htmlFor="discount">Enter the amount</label>
+              <span className='symbol'>{ cashOptionEntity === "amount" ? "$" : "%"}</span>
               <input type="text" id='discount' value={discount} ref={inputRef} onChange={handleChange}/>
               { error && (<p>{error}</p>)}
             </div>
@@ -103,7 +102,22 @@ const ModalContainer = styled.div`
             margin: 0;
         }
 
+        .tab-btns button {
+          text-align:center;
+          padding: 10px;
+          width:180px;
+          background: rgb(199, 119, 199);
+          font-weight: bold;
+          color: #fff;
+          outline:none;
+          border:none;
+        }
+      
+      .tab-btns button.active-btn {
+          background: rgb(202, 53, 202);
+      }
         
+  
     }
     .button-container {
       display:flex;

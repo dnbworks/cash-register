@@ -2,13 +2,13 @@ import React from 'react';
 import { BsPersonCircle } from "react-icons/bs";
 import { BiHelpCircle } from "react-icons/bi";
 import { AiOutlineTable } from "react-icons/ai";
-import Select from '../components/Select';
-import OrderByView from '../components/OrderByView';
-import OrderByAscDec from '../components/OrderByAscDec';
-import Search from '../components/Search';
+import Select from '../components/Home/Select';
+import OrderByView from '../components/Home/OrderByView';
+import OrderByAscDec from '../components/Home/OrderByAscDec';
+import Search from '../components/Home/Search';
 import { useGlobalContext } from '../context/AppContext';
-import ItemsList from '../components/ItemsList';
-import SelectedItems from '../components/SelectedItems';
+import ItemsList from '../components/Home/ItemsList';
+import SelectedItems from '../components/Home/SelectedItems';
 
 // AiOutlineSortAscending
 // AiOutlineSortDescending

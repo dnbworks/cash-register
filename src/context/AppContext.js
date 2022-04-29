@@ -19,6 +19,7 @@ const initialState = {
     cart: getLocalStorage(),
     amount: 0,
     storeProducts: [],
+    cashOptionEntity: "amount",
     isModalOpen: false,
     edit: false,
     discountModal: false,
@@ -61,8 +62,8 @@ const AppProvider = ({ children }) => {
       dispatch({ type: 'DECREASE', payload: id })
     }
 
-    const editDiscount = (product, discount) => {
-      dispatch({ type: 'EDIT_DISCOUNT', payload: { product, discount} })
+    const editDiscount = (product, discount, option) => {
+      dispatch({ type: 'EDIT_DISCOUNT', payload: { product, discount, option} })
     }
 
     const editQty = (product, quantity) => {
@@ -79,6 +80,10 @@ const AppProvider = ({ children }) => {
       } catch(err){
         throw new Error(err);
       }
+    }
+
+    const changeCashEntity = entity => {
+      dispatch({ type: 'CASH_ENTITY', payload: entity });
     }
 
     const toggleAmount = (id, type) => {
@@ -110,7 +115,8 @@ const AppProvider = ({ children }) => {
           openModal,
           closeModal,
           editDiscount,
-          editQty
+          editQty,
+          changeCashEntity
         }}
       >
         {children}

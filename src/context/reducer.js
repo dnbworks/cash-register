@@ -1,4 +1,4 @@
-import { InArray } from "../utils/InArray";
+import { InArray, PriceHelper } from "../utils/utilHelpers";
 
 const reducer = (state, action) => {
 
@@ -13,7 +13,7 @@ const reducer = (state, action) => {
       item.total = price;
       return { ...state, cart: [...state.cart, item ], isOpenSelectedModal: false }
     } 
-
+    // TODO update discount according to cash entity
     let tempCart = state.cart.map((cartItem) => {
       if (cartItem.id === action.payload.product.id) {
         const qty = parseInt(cartItem.qty) + parseInt(action.payload.quantity);
@@ -47,14 +47,28 @@ const reducer = (state, action) => {
     return { ...state, isAddPersonModalOpen: true }
   }
 
+  
+  if (action.type === 'CASH_ENTITY') {
+    return { ...state, cashOptionEntity: action.payload }
+  }
+
   if (action.type === 'EDIT_DISCOUNT') {
     let tempCart = state.cart.map((cartItem) => {
       if (cartItem.id === action.payload.product.id) {
-        let discount = parseFloat(action.payload.discount);
-        const TotalDiscount = (discount * cartItem.qty).toFixed(2);
+        var discount, TotalDiscount, percent;
+        if (state.cashOptionEntity === "amount") {
+          discount = parseFloat(action.payload.discount);
+          TotalDiscount = (discount * cartItem.qty).toFixed(2);
+        } else {
+          discount = parseFloat(action.payload.discount);
+          percent = (discount / 100) * cartItem.price;
+          TotalDiscount = (percent * cartItem.qty).toFixed(2);
+        }
+
         const itemTotal = (cartItem.qty * cartItem.price);
         const total = (itemTotal - TotalDiscount).toFixed(2);
-        return { ...cartItem, discount: String(discount).length <= 3 ? discount + ".00" : discount, total, totalDisc: String(TotalDiscount).length <= 3 ? TotalDiscount + ".00" : TotalDiscount }
+        
+        return { ...cartItem, discount: PriceHelper(String(discount)), total, totalDisc: PriceHelper(String(TotalDiscount)) }
       }
       return cartItem
     })
@@ -66,9 +80,10 @@ const reducer = (state, action) => {
       if (cartItem.id === action.payload.product.id) {
         let qty = action.payload.quantity;
         const TotalDiscount = (cartItem.discount * qty).toFixed(2);
+        console.log( PriceHelper(String(TotalDiscount)));
         const itemTotal = (qty * cartItem.price);
         const total = (itemTotal - TotalDiscount).toFixed(2);
-        return { ...cartItem, qty, total, totalDisc: String(TotalDiscount).length <= 3 ? TotalDiscount + ".00" : TotalDiscount }
+        return { ...cartItem, qty, total, totalDisc: PriceHelper(String(TotalDiscount))}
       }
       return cartItem
     })

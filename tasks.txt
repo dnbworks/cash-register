@@ -12,3 +12,8 @@
 8. calculator
 9. order list
 10. invoice
+
+
+
+home page use axios
+learn redux

@@ -1,6 +1,6 @@
 import React from 'react'
 import styled from 'styled-components';
-import { useGlobalContext } from '../context/AppContext';
+import { useGlobalContext } from '../../context/AppContext';
 
 const AddPersonDetails = () => {
   const { isAddPersonModalOpen, closeModal } = useGlobalContext();
