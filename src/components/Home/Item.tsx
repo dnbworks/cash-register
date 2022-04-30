@@ -1,4 +1,5 @@
 import React from 'react'
+import PropTypes from 'prop-types';
 
 const Item = ({ id, name, img, weight, price, openModal}) => {
   return (
@@ -16,5 +17,13 @@ const Item = ({ id, name, img, weight, price, openModal}) => {
     </div>
   )
 }
+
+// Item.propTypes = {
+//   id: PropTypes.number.isRequired,
+//   title: PropTypes.string.isRequired,
+//   img: PropTypes.string.isRequired,
+//   price: PropTypes.number.isRequired,
+//   inCart: PropTypes.bool.isRequired
+// };
 
 export default Item

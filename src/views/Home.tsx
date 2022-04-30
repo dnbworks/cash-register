@@ -36,7 +36,7 @@ const Home = () => {
           <div className="selected__items v-600">
             <div className="product__columns">
               <ul className="header__title d-flex justify-content-between">
-                <li width="160px !important">items</li>
+                <li style={{ width: "160px !important" }}>items</li>
                 <li>price</li>
                 <li>Qty</li>
                 <li>Discount</li>

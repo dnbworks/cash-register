@@ -1,16 +1,16 @@
 import React, { useState, useRef, useEffect } from 'react'
-import { useGlobalContext } from '../context/AppContext';
+import { useGlobalContext } from '../../context/AppContext';
 import styled from 'styled-components';
 
 const DiscountModal = () => {
     const { closeModal, selectedItem, editDiscount, cashOptionEntity, changeCashEntity } = useGlobalContext();
-    const [discount, setDiscount] = useState(selectedItem.discount ? selectedItem.discount : "0.00")
-    const [error, setError ] = useState("")
-    const inputRef = useRef(null);
+    const [discount, setDiscount] = useState<string | number>(selectedItem.discount ? selectedItem.discount : "0.00")
+    const [error, setError ] = useState<string>("")
+    const inputRef = useRef<HTMLInputElement>(null);
 
     const regex = /^[0-9]+\.[0-9]{2}$/;
 
-    const handleChange = (e) => {
+    const handleChange = (e: React.FormEvent) => {
 
         if(regex.test(e.target.value)){
           setDiscount(e.target.value)
@@ -29,7 +29,7 @@ const DiscountModal = () => {
     
     }
 
-    const handleEdit = (e) => {
+    const handleEdit = (e: React.FormEvent) => {
         e.preventDefault();
         editDiscount(selectedItem, discount);
         setDiscount(0)

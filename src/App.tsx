@@ -1,7 +1,7 @@
 import { Route, Switch } from 'react-router-dom';
 import Navbar from './components/Navbar';
 import Header from './components/Header';
-import AddPersonModal from './components/AddPersonModal';
+import AddPersonModal from './components/Home/AddPersonModal';
 import Home from './views/Home';
 import Report from './views/Report';
 import Settings from './views/Settings';
@@ -9,10 +9,10 @@ import Chart from './views/Chart';
 import Statistic from './views/Statistic';
 import Options from './views/Options';
 import LoginPage from './views/LoginPage';
-import AddPersonDetails from './components/AddPersonDetails';
-import SelectedItemModal from './components/SelectedItemModal';
+import AddPersonDetails from './components/Home/AddPersonDetails';
+import SelectedItemModal from './components/Home/SelectedItemModal';
 import { useGlobalContext } from './context/AppContext';
-import DiscountModal from './components/DiscountModal';
+import DiscountModal from './components/Home/DiscountModal';
 
 function App() {
   const { isOpenSelectedModal, discountModal } = useGlobalContext();

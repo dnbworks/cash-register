@@ -2,7 +2,7 @@ import { useGlobalContext } from '../context/AppContext';
 import styled from 'styled-components';
 import { BiSearchAlt2 } from "react-icons/bi";
 
-const AddPersonModal = () => {
+const AddPersonModal: React.FC = () => {
   const { isModalOpen, openModal, closeModal } = useGlobalContext();
 
   if(!isModalOpen){
