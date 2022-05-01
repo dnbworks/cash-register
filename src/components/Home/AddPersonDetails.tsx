@@ -3,7 +3,7 @@ import styled from 'styled-components';
 import { useGlobalContext } from '../../context/AppContext';
 
 const AddPersonDetails: React.FC = () => {
-  const { isAddPersonModalOpen, closeModal } = useGlobalContext();
+  const { isAddPersonModalOpen, closeModal } = useGlobalContext()
 
   if(!isAddPersonModalOpen){
     return null;

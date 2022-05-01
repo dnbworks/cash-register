@@ -1,12 +1,12 @@
 import React from 'react'
 import { RiDeleteBin5Line } from "react-icons/ri";
-import { useGlobalContext } from '../context/AppContext';
+import { useGlobalContext } from '../../context/AppContext';
 
 const SelectedItem = ({ id, name, price, qty, discount, total, totalDisc }) => {
   const { remove, openModal } = useGlobalContext();
   return (
     <ul className="item d-flex justify-content-between">
-        <li width="150px">{ name }</li>
+        <li style={{ width: "150px"}}>{ name }</li>
         <li>${ price }</li>
         <li><span className="edit-btn" onClick={ () => openModal({ type: "qty", id }) } >{ qty }</span></li>
         <li><span className="edit-btn" onClick={ () => openModal({ type: "discount", id }) } >${ discount }</span></li>

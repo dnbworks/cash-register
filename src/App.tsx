@@ -15,7 +15,9 @@ import { useGlobalContext } from './context/AppContext';
 import DiscountModal from './components/Home/DiscountModal';
 
 function App() {
-  const { isOpenSelectedModal, discountModal } = useGlobalContext();
+  // const { isOpenSelectedModal, discountModal } = useGlobalContext();
+  const data = useGlobalContext();
+  console.log(data);
   return (
     <div className='wrapper'>
       <Header/>
@@ -33,8 +35,8 @@ function App() {
       </div>
       <AddPersonModal/>
       <AddPersonDetails/>
-      { isOpenSelectedModal && <SelectedItemModal/> }
-      { discountModal && <DiscountModal/> }
+      {/* { isOpenSelectedModal && <SelectedItemModal/> }
+      { discountModal && <DiscountModal/> } */}
     </div>
   );
 }

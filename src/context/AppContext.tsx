@@ -1,10 +1,9 @@
-import { Item, InitialState, AppCtx, Product, AppProps } from '../@types/app'
+import { Item, Product, AppProps, InitialState } from '../@types/app'
 import React, { useContext, useReducer, useEffect } from 'react'
 import reducer from './reducer'
 import axios, { AxiosError } from 'axios'
 
 const url: string = 'http://localhost:3001/products';
-const AppContext = React.createContext<AppCtx | null>(null);
 
 const getLocalStorage = (): Item[] | [] => {
   const list: string | null = localStorage.getItem('cart');
@@ -15,34 +14,36 @@ const getLocalStorage = (): Item[] | [] => {
   }
 };
 
-const initialState: InitialState = {
-    loading: false,
-    cart: getLocalStorage(),
-    amount: 0,
-    storeProducts: [],
-    cashOptionEntity: "amount",
-    isModalOpen: false,
-    edit: false,
-    discountModal: false,
-    isAddPersonModalOpen: false,
-    isOpenSelectedModal: false,
-    selectedItem: null,
-    cartSubTotal: 0,
-    cartTax: 0,
-    cartTotal: 0
+const initialStates: InitialState = {
+  loading: false,
+  cart: getLocalStorage(),
+  amount: 0,
+  storeProducts: [],
+  cashOptionEntity: "amount",
+  isModalOpen: false,
+  edit: false,
+  discountModal: false,
+  isAddPersonModalOpen: false,
+  isOpenSelectedModal: false,
+  selectedItem: null,
+  cartSubTotal: 0,
+  cartTax: 0,
+  cartTotal: 0
 }
 
-const AppProvider = ( props: AppProps ) => {
-    const [state, dispatch] = useReducer(reducer, initialState)
+interface AppCtx extends InitialState {
+  closeModal: () => void;
+}
 
-    const getItem = (id: number) => {
-      const product = state.storeProducts.find((item: Product) => item.id === id );
-      return product;
-    }
+const AppContext = React.createContext<AppCtx | null>(null);
 
-    const openModal = (id: number | string) => {
-      dispatch({ type: 'OPEN_MODAL', payload: id })
-    };
+const AppProvider = ( { children } : AppProps ) => {
+  const [state , dispatch] = useReducer(reducer, initialStates) // fix
+  
+  const openModal = (id: number | string) => {
+    dispatch({ type: 'OPEN_MODAL', payload: id })
+  };
+
     const closeModal = (id: number | string) => {
       dispatch({ type: 'CLOSE_MODAL', payload: id })
     };
@@ -106,7 +107,7 @@ const AppProvider = ( props: AppProps ) => {
           changeCashEntity
         }}
       >
-        { props.children }
+        { children }
       </AppContext.Provider>
     )
   }

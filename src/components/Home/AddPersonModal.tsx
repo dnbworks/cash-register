@@ -1,4 +1,4 @@
-import { useGlobalContext } from '../context/AppContext';
+import { useGlobalContext } from '../../context/AppContext';
 import styled from 'styled-components';
 import { BiSearchAlt2 } from "react-icons/bi";
 

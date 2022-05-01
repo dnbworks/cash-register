@@ -6,8 +6,9 @@ export interface Item {
     name: string;
     price: number;
     qty: number;
-    discount: number;
+    discount: number | string;
     total: number;
+    totalDisc: string;
 }
 
 // product fetched from database
@@ -21,11 +22,11 @@ export interface Product {
 }
 
 // reducer initial state
-export interface InitialState {
+export type InitialState = {
     loading: boolean;
     cart: Item[] | []; 
     amount: number
-    storeProducts: [],
+    storeProducts: Product[],
     cashOptionEntity: string;
     isModalOpen: boolean;
     edit: boolean;
@@ -39,11 +40,41 @@ export interface InitialState {
 }
 
 
-export interface AppCtx extends InitialState {
-    
-}
-
-export interface AppProps { 
+export type AppProps = { 
     children: React.ReactNode
 }
+
+type PayloadObj = {
+    type: string | number;
+}
+
+type Discount = {
+    product: Item;
+    discount: number | string;
+}
+
+type Quantity = {
+    product: Item;
+    quantity: number;
+}
+
+type AddToCartObj = {
+    product: Product;
+    quantity: number;
+}
+
+export type Actions = 
+ | { type: "OPEN_MODAL", payload: PayloadObj } 
+ | { type: "CLOSE_MODAL", payload: string | number }
+ | { type: "CLEAR_CART" }
+ | { type: "REMOVE", payload: number }
+ | { type: "EDIT_DISCOUNT", payload: Discount }
+ | { type: "EDIT_QTY", payload: Quantity }
+ | { type: "CASH_ENTITY", payload: string }
+ | { type: "LOADING"}
+ | { type: "DISPLAY_ITEMS", payload: Product[] }
+ | { type: "ADD_TO_CART", payload: AddToCartObj };
+
+
+
   
