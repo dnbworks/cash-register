@@ -1,3 +1,5 @@
+import { Item, Product, AppProps, InitialState } from '../@types/app'
+
 export const InArray = (identifer, items) => {
     var count = items.length;
     for(var i=0; i<count; i++) {
@@ -18,3 +20,13 @@ export const PriceHelper = (price) => {
         return price + ".00";
     }
 }
+
+export const getLocalStorage = (): Item[] | [] => {
+    const list: string | null = localStorage.getItem('cart');
+    if (list) {
+      return JSON.parse(list);
+    } else {
+      return [];
+    }
+};
+  

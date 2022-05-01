@@ -1,4 +1,3 @@
-// @types.app.ts
 
 // item when added to cart
 export interface Item {
@@ -33,11 +32,20 @@ export type InitialState = {
     discountModal: boolean;
     isAddPersonModalOpen: boolean;
     isOpenSelectedModal: boolean;
-    selectedItem: null,
+    selectedItem: Item | Product | null,
     cartSubTotal: number;
     cartTax: number;
     cartTotal: number;
+    openModal: ( id: number | string ) => void;
+    closeModal : ( id: number | string ) => void;
+    clearCart: () => void;
+    remove: (id: number) => void;
+    editDiscount: ( product: Item, discount: string | number ) => void;
+    editQty: ( product: Item, quantity: number) => void;
+    changeCashEntity: ( entity: string) => void;
+    add_to_cart: ( product: Product, quantity: number) => void;
 }
+
 
 
 export type AppProps = { 
@@ -73,8 +81,6 @@ export type Actions =
  | { type: "CASH_ENTITY", payload: string }
  | { type: "LOADING"}
  | { type: "DISPLAY_ITEMS", payload: Product[] }
- | { type: "ADD_TO_CART", payload: AddToCartObj };
-
-
-
-  
+ | { type: "ADD_TO_CART", payload: AddToCartObj }
+ | { type: "GET_TOTALS" }
+ ;

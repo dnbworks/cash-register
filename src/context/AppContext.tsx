@@ -1,24 +1,16 @@
-import { Item, Product, AppProps, InitialState } from '../@types/app'
+import { Item, Product, AppProps, InitialState, Actions } from '../@types/app'
 import React, { useContext, useReducer, useEffect } from 'react'
-import reducer from './reducer'
+import { getLocalStorage } from '../utils/utilHelpers'
+import { reducer } from './reducer'
 import axios, { AxiosError } from 'axios'
 
 const url: string = 'http://localhost:3001/products';
 
-const getLocalStorage = (): Item[] | [] => {
-  const list: string | null = localStorage.getItem('cart');
-  if (list) {
-    return JSON.parse(list);
-  } else {
-    return [];
-  }
-};
-
-const initialStates: InitialState = {
+export const initialStates: InitialState = {
   loading: false,
   cart: getLocalStorage(),
   amount: 0,
-  storeProducts: [],
+  storeProducts: [{ id: 1, name: "Moen Home Care Brushed Nickel 9\" Designer Hand Grip", img: "/img/moen.jpg", price: 26.40, weight: 2, category: "Grabs" }],
   cashOptionEntity: "amount",
   isModalOpen: false,
   edit: false,
@@ -28,20 +20,31 @@ const initialStates: InitialState = {
   selectedItem: null,
   cartSubTotal: 0,
   cartTax: 0,
-  cartTotal: 0
+  cartTotal: 0,
+  openModal: ( id: number | string ) => {},
+  closeModal: ( id: number | string ) => {},
+  clearCart: () => {},
+  remove: (id: number) => {},
+  editDiscount: ( product: Item, discount: string | number ) => {},
+  editQty: ( product: Item, quantity: number) => {},
+  changeCashEntity: ( entity: string ) => {},
+  add_to_cart: ( product: Product, quantity: number) => {},
 }
 
-interface AppCtx extends InitialState {
-  closeModal: () => void;
-}
 
-const AppContext = React.createContext<AppCtx | null>(null);
+const AppContext = React.createContext<{ 
+  state: InitialState; 
+  dispatch: React.Dispatch<Actions>; 
+}>({ 
+  state: initialStates, 
+  dispatch: () => undefined,
+});
 
 const AppProvider = ( { children } : AppProps ) => {
-  const [state , dispatch] = useReducer(reducer, initialStates) // fix
+  const [state , dispatch] = useReducer(reducer, initialStates)
   
   const openModal = (id: number | string) => {
-    dispatch({ type: 'OPEN_MODAL', payload: id })
+    dispatch({ type: 'OPEN_MODAL', payload: { type: id} })
   };
 
     const closeModal = (id: number | string) => {
@@ -76,7 +79,7 @@ const AppProvider = ( { children } : AppProps ) => {
     }
 
 
-    const changeCashEntity = (entity: number) => {
+    const changeCashEntity = (entity: string) => {
       dispatch({ type: 'CASH_ENTITY', payload: entity });
     }
 
@@ -95,17 +98,7 @@ const AppProvider = ( { children } : AppProps ) => {
 
     return (
       <AppContext.Provider
-        value={{
-          ...state,
-          clearCart,
-          remove,
-          add_to_cart,
-          openModal,
-          closeModal,
-          editDiscount,
-          editQty,
-          changeCashEntity
-        }}
+        value={{ state: { ...state, openModal, closeModal, clearCart, remove, editDiscount, editQty, changeCashEntity, add_to_cart }, dispatch }}
       >
         { children }
       </AppContext.Provider>

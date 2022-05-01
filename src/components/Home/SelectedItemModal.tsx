@@ -1,5 +1,5 @@
 import React, { useState, useRef, useEffect } from 'react'
-import { useGlobalContext } from '../context/AppContext';
+import { useGlobalContext } from '../../context/AppContext';
 import styled from 'styled-components';
 
 const SelectedItemModal = () => {

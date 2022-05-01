@@ -1,7 +1,7 @@
 import { InitialState, Actions, Item, Product } from '../@types/app'
 import { InArray, PriceHelper } from "../utils/utilHelpers";
 
-const reducer = (state: InitialState, action: Actions) => {
+export function reducer(state: InitialState, action: Actions): InitialState  {
 
   switch(action.type){
     case 'OPEN_MODAL':
@@ -112,6 +112,12 @@ const reducer = (state: InitialState, action: Actions) => {
         return cartItem
       })
       return { ...state, cart: tempCart, isOpenSelectedModal: false }
+
+    case 'GET_TOTALS':
+      return { ...state }
+      
+    default:
+      return state;
       
   }
 
@@ -138,4 +144,3 @@ const reducer = (state: InitialState, action: Actions) => {
   
 }
 
-export default reducer
