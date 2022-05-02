@@ -27,10 +27,10 @@ export function reducer(state: InitialState, action: Actions): InitialState  {
         return { ...state, isModalOpen: false }
       }
       if(typeof action.payload === "number"){
-        return { ...state, isOpenSelectedModal: false, selectedItem: null }
+        return { ...state, isOpenSelectedModal: false, selectedItem: undefined  }
       }
       if(action.payload == "discount"){
-        return { ...state, discountModal: false, selectedItem: null}
+        return { ...state, discountModal: false, selectedItem: undefined }
       }
       return { ...state, isAddPersonModalOpen: false }
     
@@ -79,7 +79,7 @@ export function reducer(state: InitialState, action: Actions): InitialState  {
       })
       return { ...state, cart: tempCart2, discountModal: false, edit: false, isOpenSelectedModal: false }
 
-    case 'EDIT_QTY':
+    case 'CASH_ENTITY':
       return { ...state, cashOptionEntity: action.payload }
 
     case 'LOADING':

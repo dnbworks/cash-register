@@ -32,7 +32,7 @@ export type InitialState = {
     discountModal: boolean;
     isAddPersonModalOpen: boolean;
     isOpenSelectedModal: boolean;
-    selectedItem: Item | Product | null,
+    selectedItem: Item | undefined,
     cartSubTotal: number;
     cartTax: number;
     cartTotal: number;

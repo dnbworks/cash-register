@@ -2,8 +2,9 @@ import React from 'react'
 import styled from 'styled-components';
 import { useGlobalContext } from '../../context/AppContext';
 
+
 const AddPersonDetails: React.FC = () => {
-  const { isAddPersonModalOpen, closeModal } = useGlobalContext()
+  const { state: { isAddPersonModalOpen, closeModal } } = useGlobalContext();
 
   if(!isAddPersonModalOpen){
     return null;

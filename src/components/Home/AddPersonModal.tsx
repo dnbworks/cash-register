@@ -3,9 +3,9 @@ import styled from 'styled-components';
 import { BiSearchAlt2 } from "react-icons/bi";
 
 const AddPersonModal: React.FC = () => {
-  const { isModalOpen, openModal, closeModal } = useGlobalContext();
+  const { state } = useGlobalContext();
 
-  if(!isModalOpen){
+  if(!state.isModalOpen){
     return null;
   }
 
@@ -33,8 +33,8 @@ const AddPersonModal: React.FC = () => {
             </ul>
           </div>
           <div className="modal__footer">
-            <button onClick={() => openModal("add_customer")}>Add</button>
-            <button onClick={() => closeModal("customer")}>Close</button>
+            <button onClick={() => state.openModal("add_customer")}>Add</button>
+            <button onClick={() => state.closeModal("customer")}>Close</button>
           </div>
         </div>
     </ModalContainer>

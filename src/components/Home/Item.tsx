@@ -1,7 +1,16 @@
 import React from 'react'
 import PropTypes from 'prop-types';
 
-const Item = ({ id, name, img, weight, price, openModal}) => {
+interface Props {
+  id: number;
+  name: string;
+  img: string;
+  weight: number;
+  price: number;
+  openModal: (id: number | string ) => void;
+}
+
+const Item: React.FC<Props> = ({ id, name, img, weight, price, openModal}) => {
   return (
     <div className="item_product" onClick={() => openModal(id)}>
         <div className="weight">

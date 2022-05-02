@@ -17,7 +17,7 @@ export const initialStates: InitialState = {
   discountModal: false,
   isAddPersonModalOpen: false,
   isOpenSelectedModal: false,
-  selectedItem: null,
+  selectedItem: undefined,
   cartSubTotal: 0,
   cartTax: 0,
   cartTotal: 0,

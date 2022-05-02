@@ -1,59 +1,68 @@
-import React, { useRef, useEffect } from 'react';
+import React, { useRef, useLayoutEffect } from 'react';
 
 const Select = () => {
-    const customSelect = useRef(null);
-    const customDiv = useRef(null);
-    var x, i, j, l, ll, selElmnt, a, b, c;
+    const customSelect = useRef<HTMLSelectElement>(null);
+    const customDiv = useRef<HTMLDivElement>(null);
+    var  j, ll: number, a: any, b: any, c: any;
 
-    useEffect(() => {
+    useLayoutEffect(() => {
+      if (null !== customSelect.current && null !== customDiv.current) {
         ll = customSelect.current.length;
+
         a = document.createElement("DIV");
         a.setAttribute("class", "select-selected");
-        a.innerHTML = customSelect.current.options[customSelect.current.selectedIndex].innerHTML;
+
+        a.innerHTML = customSelect.current?.options[customSelect.current.selectedIndex].innerHTML;
+
         customDiv.current.appendChild(a);
+
         b = document.createElement("DIV");
         b.setAttribute("class", "select-items select-hide");
+
         for (j = 1; j < ll; j++) {
-            /* For each option in the original select element,
-            create a new DIV that will act as an option item: */
-            c = document.createElement("DIV");
-            c.innerHTML = customSelect.current.options[j].innerHTML;
-            c.addEventListener("click", function(e) {
-                /* When an item is clicked, update the original select box,
-                and the selected item: */
-                var y, i, k, s, h, sl, yl;
-                s = this.parentNode.parentNode.getElementsByTagName("select")[0];
-                sl = s.length;
-                h = this.parentNode.previousSibling;
-                for (i = 0; i < sl; i++) {
-                if (s.options[i].innerHTML == this.innerHTML) {
+          /* For each option in the original select element, create a new DIV that will act as an option item: */
+          c = document.createElement("DIV");
+          c.innerHTML = customSelect.current.options[j].innerHTML;
+          c.addEventListener("click", function(e: MouseEvent) {
+          /* When an item is clicked, update the original select box, and the selected item: */
+            var y, i, k, s, h, sl, yl;
+
+            s = c.parentNode.parentNode.getElementsByTagName("select")[0];
+  
+            sl = s.length;
+
+            h = c.parentNode.previousSibling;
+              for (i = 0; i < sl; i++) {
+                if (s.options[i].innerHTML == c.innerHTML) {
                     s.selectedIndex = i;
-                    h.innerHTML = this.innerHTML;
-                    y = this.parentNode.getElementsByClassName("same-as-selected");
+                    h.innerHTML = c.innerHTML;
+                    y = c.parentNode.getElementsByClassName("same-as-selected");
                     yl = y.length;
                     for (k = 0; k < yl; k++) {
                     y[k].removeAttribute("class");
                     }
-                    this.setAttribute("class", "same-as-selected");
+                    c.setAttribute("class", "same-as-selected");
                     break;
                 }
-                }
-                h.click();
+              }
+            h.click();
             });
             b.appendChild(c);
         }
-        customDiv.current.appendChild(b);
+      }
 
-        a.addEventListener("click", function(e) {
+        customDiv.current?.appendChild(b);
+
+        a.addEventListener("click", function(e: MouseEvent) {
             /* When the select box is clicked, close any other select boxes,
             and open/close the current select box: */
             e.stopPropagation();
-            closeAllSelect(this);
-            this.nextSibling.classList.toggle("select-hide");
-            this.classList.toggle("select-arrow-active");
+            closeAllSelect(a);
+            a.nextSibling.classList.toggle("select-hide");
+            a.classList.toggle("select-arrow-active");
         });
 
-        function closeAllSelect(elmnt) {
+        function closeAllSelect(elmnt: any) {
             /* A function that will close all select boxes in the document,
             except the current select box: */
             var x, y, i, xl, yl, arrNo = [];
@@ -79,7 +88,6 @@ const Select = () => {
           then close all select boxes: */
           document.addEventListener("click", closeAllSelect);
         
-        // console.log(customDiv.current);
     }, []);
 
   return (

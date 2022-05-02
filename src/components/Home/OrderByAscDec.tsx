@@ -1,7 +1,7 @@
 import React, { useState } from 'react'
 
-const OrderByAscDec = () => {
-  const [active, setActive] = useState(0)
+const OrderByAscDec: React.FC = () => {
+  const [active, setActive] = useState<number>(0)
   return (
     <div className="toggleBtn">
         <button className={`${active === 0 && 'active'}`} onClick={() => setActive(0)}>Ascending</button>
