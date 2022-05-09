@@ -1,4 +1,4 @@
-import { Item, Product, AppProps, InitialState, Actions } from '../@types/app'
+import { Item, Product, AppProps, InitialState, Actions, PayloadObj } from '../@types/app'
 import React, { useContext, useReducer, useEffect } from 'react'
 import { getLocalStorage } from '../utils/utilHelpers'
 import { reducer } from './reducer'
@@ -21,12 +21,12 @@ export const initialStates: InitialState = {
   cartSubTotal: 0,
   cartTax: 0,
   cartTotal: 0,
-  openModal: ( id: number | string ) => {},
+  openModal: ( obj: PayloadObj ) => {},
   closeModal: ( id: number | string ) => {},
   clearCart: () => {},
   remove: (id: number) => {},
   editDiscount: ( product: Item, discount: string | number ) => {},
-  editQty: ( product: Item, quantity: number) => {},
+  editQty: ( product: Item | Product, quantity: number) => {},
   changeCashEntity: ( entity: string ) => {},
   add_to_cart: ( product: Product, quantity: number) => {},
 }
@@ -43,8 +43,8 @@ const AppContext = React.createContext<{
 const AppProvider = ( { children } : AppProps ) => {
   const [state , dispatch] = useReducer(reducer, initialStates)
   
-  const openModal = (id: number | string) => {
-    dispatch({ type: 'OPEN_MODAL', payload: { type: id} })
+  const openModal = ( obj: PayloadObj) => {
+    dispatch({ type: 'OPEN_MODAL', payload: { type: obj.type, id: obj.id} })
   };
 
     const closeModal = (id: number | string) => {
@@ -63,7 +63,7 @@ const AppProvider = ( { children } : AppProps ) => {
       dispatch({ type: 'EDIT_DISCOUNT', payload: { product, discount} })
     }
 
-    const editQty = (product: Item, quantity: number) => {
+    const editQty = (product: Item | Product, quantity: number) => {
       dispatch({ type: 'EDIT_QTY', payload: { product, quantity} })
     }
 

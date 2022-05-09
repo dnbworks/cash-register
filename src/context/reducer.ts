@@ -30,12 +30,9 @@ export function reducer(state: InitialState, action: Actions): InitialState  {
         return { ...state, isOpenSelectedModal: false, selectedItem: undefined  }
       }
       if(action.payload == "discount"){
-        return { ...state, discountModal: false, selectedItem: undefined }
+        return { ...state, discountModal: false, selectedItem:  undefined }
       }
       return { ...state, isAddPersonModalOpen: false }
-    
-    case 'CLOSE_MODAL':
-      return { ...state, cart: [] }
     
     case 'REMOVE':
       return {

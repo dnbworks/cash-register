@@ -3,7 +3,7 @@ import { useGlobalContext } from '../../context/AppContext';
 import SelectedItem from './SelectedItem';
 
 const SelectedItems = () => {
-  const { cart, openModal } = useGlobalContext();
+  const { state: {cart, openModal} } = useGlobalContext();
   return (
     <div className="table-wrapper__selected--items">
        { cart.map(item => {

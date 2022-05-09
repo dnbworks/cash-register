@@ -3,22 +3,22 @@ import { useGlobalContext } from '../../context/AppContext';
 import styled from 'styled-components';
 
 const SelectedItemModal = () => {
-  const { closeModal, selectedItem, add_to_cart, editQty, edit } = useGlobalContext();
+  const { state: {closeModal, selectedItem, add_to_cart, editQty, edit} } = useGlobalContext();
 
-  const [quantity, setQuantity ] = useState(selectedItem.qty ? selectedItem.qty : 0)
+  const [quantity, setQuantity ] = useState<string | number | undefined>(selectedItem ? selectedItem.qty : 0)
   const [error, setError ] = useState("")
 
-  const inputRef = useRef(null);
+  const inputRef = useRef<HTMLInputElement>(null);
 
   const regex = /^[1-9][0-9]*$/;
   
 
   useEffect(() => {
-    inputRef.current.setSelectionRange(0, 0);
-    inputRef.current.focus();
+    inputRef.current?.setSelectionRange(0, 0);
+    inputRef.current?.focus();
   });
 
-  const handleChange = (e) => {
+  const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
 
     if(regex.test(e.target.value)){
       setQuantity(undefined)
@@ -38,11 +38,10 @@ const SelectedItemModal = () => {
 
   }
 
-  const handleAddToCartBtn = (e) => {
+  const handleAddToCartBtn = (e: React.FormEvent) => {
     e.preventDefault();
-    if (error === "" && quantity >= 1) {
-      if(edit){
-        console.log(quantity);
+    if (error === "" && quantity && quantity >= 1) {
+      if(edit && selectedItem){
         editQty(selectedItem, quantity)
       } else {
         add_to_cart(selectedItem, quantity)
@@ -65,7 +64,7 @@ const SelectedItemModal = () => {
             </div>
             <div style={{ width: "200px"}}>
               <label htmlFor="quantity">Quantity</label>
-              <input type="text" id='quantity' value={quantity} ref={inputRef} onChange={handleChange}/>
+              <input type="text" id='quantity' value={quantity} ref={inputRef} onChange={ (e) => handleChange(e)}/>
               { error && (<p>{error}</p>)}
             </div>
             <div className="modal__footer">

@@ -2,8 +2,18 @@ import React from 'react'
 import { RiDeleteBin5Line } from "react-icons/ri";
 import { useGlobalContext } from '../../context/AppContext';
 
-const SelectedItem = ({ id, name, price, qty, discount, total, totalDisc }) => {
-  const { remove, openModal } = useGlobalContext();
+interface Props {
+  id: number;
+  name: string;
+  qty: number;
+  price: number;
+  discount: number;
+  total: number;
+  totalDisc: number;
+}
+
+const SelectedItem:  React.FC<Props> = ({ id, name, price, qty, discount, total, totalDisc }) => {
+  const { state: {remove, openModal} } = useGlobalContext();
   return (
     <ul className="item d-flex justify-content-between">
         <li style={{ width: "150px"}}>{ name }</li>

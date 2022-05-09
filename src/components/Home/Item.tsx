@@ -1,5 +1,6 @@
 import React from 'react'
 import PropTypes from 'prop-types';
+import { PayloadObj } from '../../@types/app'
 
 interface Props {
   id: number;
@@ -7,12 +8,12 @@ interface Props {
   img: string;
   weight: number;
   price: number;
-  openModal: (id: number | string ) => void;
+  openModal: ( obj: PayloadObj ) => void;
 }
-
+// 
 const Item: React.FC<Props> = ({ id, name, img, weight, price, openModal}) => {
   return (
-    <div className="item_product" onClick={() => openModal(id)}>
+    <div className="item_product" onClick={ () => openModal({ type: id }) }>
         <div className="weight">
             <span className='weight__unit'>{weight} kg</span>
         </div>

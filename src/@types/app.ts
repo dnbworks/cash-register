@@ -20,6 +20,11 @@ export interface Product {
     category: string
 }
 
+export type PayloadObj = {
+    type: string | number;
+    id?: number;
+}
+
 // reducer initial state
 export type InitialState = {
     loading: boolean;
@@ -32,16 +37,16 @@ export type InitialState = {
     discountModal: boolean;
     isAddPersonModalOpen: boolean;
     isOpenSelectedModal: boolean;
-    selectedItem: Item | undefined,
+    selectedItem: any, 
     cartSubTotal: number;
     cartTax: number;
     cartTotal: number;
-    openModal: ( id: number | string ) => void;
+    openModal: ( obj: PayloadObj ) => void;
     closeModal : ( id: number | string ) => void;
     clearCart: () => void;
     remove: (id: number) => void;
     editDiscount: ( product: Item, discount: string | number ) => void;
-    editQty: ( product: Item, quantity: number) => void;
+    editQty: ( product: Item | Product, quantity: number) => void;
     changeCashEntity: ( entity: string) => void;
     add_to_cart: ( product: Product, quantity: number) => void;
 }
@@ -52,9 +57,7 @@ export type AppProps = {
     children: React.ReactNode
 }
 
-type PayloadObj = {
-    type: string | number;
-}
+
 
 type Discount = {
     product: Item;
@@ -62,7 +65,7 @@ type Discount = {
 }
 
 type Quantity = {
-    product: Item;
+    product: Item | Product;
     quantity: number;
 }
 

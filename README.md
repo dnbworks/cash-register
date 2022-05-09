@@ -1,5 +1,5 @@
 
 ## Cash Register React app
 
-In the project directory, you can run:
+This project is on development
 
